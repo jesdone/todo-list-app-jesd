@@ -1,7 +1,16 @@
-function Form(props: any) {
+import { SetStateAction, useState } from "react";
+
+function Form(props: { addTask: (arg0: string) => void }) {
+  const [name, setName] = useState("");
+
+  function handleChange(event: { target: { value: SetStateAction<string> } }) {
+    setName(event.target.value);
+  }
+
   function handleSubmit(event: { preventDefault: () => void }) {
     event.preventDefault();
-    props.onSubmit("Hello, world!");
+    props.addTask(name);
+    setName("");
   }
 
   return (
@@ -17,6 +26,8 @@ function Form(props: any) {
         className="input input__lg"
         name="text"
         autoComplete="off"
+        value={name}
+        onChange={handleChange}
       />
       <button type="submit" className="btn btn__primary btn__lg">
         Add

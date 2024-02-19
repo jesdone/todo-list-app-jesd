@@ -1,14 +1,6 @@
-import Form from "./components/form";
+import Form from "./components/Form";
 import FilterButton from "./components/FilterButton";
-import Todo from "./components/task";
-import {
-  Key,
-  PromiseLikeOfReactNode,
-  ReactElement,
-  JSXElementConstructor,
-  ReactNode,
-} from "react";
-import { ReactDOM } from "react";
+import Todo from "./components/Task";
 
 const DATA = [
   { id: "todo-0", name: "Eat", completed: true },
@@ -17,35 +9,24 @@ const DATA = [
 ];
 
 function App(props: { tasks: any[] }) {
-  const taskList = props.tasks?.map(
-    (task: {
-      id: Key | null | undefined;
-      name:
-        | string
-        | number
-        | boolean
-        | PromiseLikeOfReactNode
-        | ReactElement<any, string | JSXElementConstructor<any>>
-        | Iterable<ReactNode>
-        | null
-        | undefined;
-      completed: any;
-    }) => (
-      <Todo
-        id={task.id}
-        name={task.name}
-        completed={task.completed}
-        key={task.id}
-      />
-    )
-  );
+  function addTask(name: any) {
+    alert(name);
+  }
+
+  const taskList = props.tasks?.map((task) => (
+    <Todo
+      id={task.id}
+      name={task.name}
+      completed={task.completed}
+      key={task.id}
+    />
+  ));
   return (
     <>
       <App tasks={DATA} />
-
       <div className="todoapp stack-large">
         <h1>TodoMatic</h1>
-        <Form />
+        <Form onSubmit={addTask} />
         <div className="filters btn-group stack-exception">
           <FilterButton />
           <FilterButton />

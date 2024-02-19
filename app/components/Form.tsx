@@ -1,7 +1,7 @@
-function Form() {
+function Form(props: any) {
   function handleSubmit(event: { preventDefault: () => void }) {
     event.preventDefault();
-    alert("Hello, world!");
+    props.onSubmit("Hello, world!");
   }
 
   return (
